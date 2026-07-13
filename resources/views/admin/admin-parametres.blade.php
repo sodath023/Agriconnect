@@ -124,13 +124,14 @@
         </div>
 
         <form id="settingsForm" onsubmit="saveSettings(event)">
+            @csrf
             <div class="grid">
                 <!-- Paramètres Financiers -->
                 <div class="card anim d1">
                     <h3 class="ct"><i class="ph ph-currency-circle-dollar"></i> Paramètres Financiers</h3>
                     <div class="fg">
                         <label class="lb">Taux de commission plateforme (%)</label>
-                        <input type="number" class="inp" id="commission" value="4" min="0" max="20" step="0.5" required>
+                        <input type="number" class="inp" id="commission" value="10" min="0" max="20" step="0.5" required>
                         <div class="helper"><i class="ph ph-info"></i> Ce pourcentage est prélevé automatiquement sur chaque transaction réussie.</div>
                     </div>
                     <div class="fg">
