@@ -71,7 +71,6 @@ Route::middleware('guest')->group(function () {
 });
 
 
-Route::get('/deconnexion', [AuthController::class, 'logout'])->name('deconnexion');
 Route::post('/deconnexion', [AuthController::class, 'logout'])->name('deconnexion');
 
 Route::get('/admin-dashboard.html', function () {
