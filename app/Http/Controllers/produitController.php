@@ -17,7 +17,7 @@ class ProduitController extends Controller
 
         'nom'=>'required',
 
-        'description'=>'required',
+        'description'=>'string',
 
         'prix'=>'required|numeric',
 

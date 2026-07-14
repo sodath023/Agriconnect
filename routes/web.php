@@ -133,7 +133,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/utilisateurs-admin', [AdminController::class, 'indexutilisateursadmin'])->name('admin.utilisateurs');
         Route::get('/utilisateurs-admin/export-pdf', [AdminController::class, 'exportUsersPdf'])->name('admin.utilisateurs.export-pdf');
 
+        //route pour valider un produit par l'admin
+        Route::post('/moderation-admin/valider-produit/{id}', [AdminController::class, 'validerProduit'])->name('admin.moderation.valider-produit');
 
+        //route pour rejeter un produit par l'admin
+        Route::post('/moderation-admin/rejeter-produit/{id}', [AdminController::class, 'rejeterProduit'])->name('admin.moderation.rejeter-produit');
     //route pour afficher toute les pages de producteur
 
     //route pour afficher la page de commandes reçues du producteur
