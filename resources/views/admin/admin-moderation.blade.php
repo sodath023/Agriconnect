@@ -83,8 +83,14 @@
                         <div class="c-meta"><i class="ph ph-user"></i> {{ $product->user?->name ?? 'Utilisateur inconnu' }} &middot; <i class="ph ph-clock"></i> {{ $product->created_at ? $product->created_at->diffForHumans() : 'Date inconnue' }}</div>
                         <div class="c-price">{{ number_format($product->prix ?? 0, 0, ',', ' ') }} FCFA</div>
                         <div class="c-actions">
-                            <a href="{{ route('admin.moderation.valider-produit', ['id' => $product->id]) }}" class="btn ba" onclick="approveProd('prod-{{ $product->id }}')"><i class="ph ph-check-circle"></i> Valider</a>
-                            <a href="{{ route('admin.moderation.rejeter-produit', ['id' => $product->id]) }}" class="btn br" onclick="rejectProd('prod-{{ $product->id }}')"><i class="ph ph-x-circle"></i> Rejeter</a>
+                            <form action="{{ route('admin.moderation.valider-produit', ['id' => $product->id]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn ba" onclick="approveProd('prod-{{ $product->id }}')"><i class="ph ph-check-circle"></i> Valider</button>
+                            </form>
+                            <form action="{{ route('admin.moderation.rejeter-produit', ['id' => $product->id]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn br" onclick="rejectProd('prod-{{ $product->id }}')"><i class="ph ph-x-circle"></i> Rejeter</button>
+                            </form>
                         </div>
                     </div>
                 </div>
