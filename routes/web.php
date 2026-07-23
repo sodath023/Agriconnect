@@ -6,7 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProducteurController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\PaiementController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\otpcontroller;
 use App\Http\Controllers\Api\ProductController;
@@ -96,8 +96,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/panier/{item}', [PanierController::class, 'supprimer'])->name('panier.supprimer');
     Route::get('/checkout', [PanierController::class, 'checkout'])->name('checkout');
     Route::post('/checkout', [CommandeController::class, 'store'])->name('checkout.process');
-    Route::get('/paiement/{order}', [PaiementController::class, 'show'])->name('paiement.show');
-    Route::post('/paiement', [PaiementController::class, 'pay'])->name('paiement.pay');
+    
+    // Routes de paiement (simulation mobile money)
+    Route::get('/payment/{order}', [PaymentController::class, 'show'])->name('payment.show');
+    Route::post('/payment/initialize', [PaymentController::class, 'initializePayment'])->name('payment.initialize');
+    Route::post('/payment/verify', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
+    Route::get('/payment/{order}/confirmation', [PaymentController::class, 'confirmation'])->name('payment.confirmation');
+    Route::get('/payment/{order}/retry', [PaymentController::class, 'retryPayment'])->name('payment.retry');
 
     // Routes pour les produits
     Route::get('/admin/produits', [ProductController::class, 'index'])->name('admin.produits');
