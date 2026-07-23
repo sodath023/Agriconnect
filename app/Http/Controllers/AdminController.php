@@ -128,4 +128,22 @@ class AdminController extends Controller
 
         return redirect()->route('admin.utilisateurs')->with('success', 'Rôle de l\'utilisateur mis à jour avec succès.');
     }
+
+    public function validerProduit(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        $product->statut = "valide";
+        $product->save();
+
+        return redirect()->route('admin.moderation')->with('success', 'Statut du produit mis à jour avec succès.');
+    }
+
+    public function rejeterProduit(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        $product->statut = "rejete";
+        $product->save();
+
+        return redirect()->route('admin.moderation')->with('success', 'Statut du produit mis à jour avec succès.');
+    }
 }

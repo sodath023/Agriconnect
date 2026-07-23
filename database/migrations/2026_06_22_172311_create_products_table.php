@@ -23,7 +23,7 @@ return new class extends Migration
 
         $table->string('nom');
 
-        $table->text('description');
+        $table->text('description')->nullable();
 
         $table->decimal('prix',12,2);
 

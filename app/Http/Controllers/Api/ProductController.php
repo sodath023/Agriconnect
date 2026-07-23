@@ -34,11 +34,11 @@ class ProductController extends Controller
         $request->validate([
             'category_id' => 'required|exists:categories,id',
             'nom' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'string',
             'prix' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'unite' => 'nullable|string',
-            'image' => 'nullable|image|max:2048'
+            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         $image = null;

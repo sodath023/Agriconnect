@@ -73,7 +73,9 @@
                         @else
                             <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#6B7280;background:#e5e7eb">Aucune image</div>
                         @endif
-                        <div class="c-badge">En attente</div>
+                        @if($product->statut === 'en_attente')
+                            <div class="c-badge" style="background:#ef4444;color:white">En attente</div>
+                        @endif
                     </div>
                     <div class="c-body">
                         <div class="c-cat">{{ $product->category?->name ?? 'Sans catégorie' }}</div>
@@ -81,8 +83,14 @@
                         <div class="c-meta"><i class="ph ph-user"></i> {{ $product->user?->name ?? 'Utilisateur inconnu' }} &middot; <i class="ph ph-clock"></i> {{ $product->created_at ? $product->created_at->diffForHumans() : 'Date inconnue' }}</div>
                         <div class="c-price">{{ number_format($product->prix ?? 0, 0, ',', ' ') }} FCFA</div>
                         <div class="c-actions">
-                            <button class="btn ba" onclick="approveProd('prod-{{ $product->id }}')"><i class="ph ph-check-circle"></i> Valider</button>
-                            <button class="btn br" onclick="rejectProd('prod-{{ $product->id }}')"><i class="ph ph-x-circle"></i> Rejeter</button>
+                            <form action="{{ route('admin.moderation.valider-produit', ['id' => $product->id]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn ba" onclick="approveProd('prod-{{ $product->id }}')"><i class="ph ph-check-circle"></i> Valider</button>
+                            </form>
+                            <form action="{{ route('admin.moderation.rejeter-produit', ['id' => $product->id]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn br" onclick="rejectProd('prod-{{ $product->id }}')"><i class="ph ph-x-circle"></i> Rejeter</button>
+                            </form>
                         </div>
                     </div>
                 </div>
